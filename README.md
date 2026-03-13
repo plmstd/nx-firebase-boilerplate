@@ -24,7 +24,7 @@ packages/
 ### 1. Clone and set up
 
 ```bash
-git clone https://github.com/bennyqp/nx-firebase-boilerplate.git my-project
+git clone https://github.com/plmstd/nx-firebase-boilerplate.git my-project
 cd my-project
 node setup.mjs
 ```
