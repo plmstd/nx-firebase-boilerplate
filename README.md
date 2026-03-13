@@ -49,8 +49,19 @@ npm run dev:web
 # Start Firebase emulators (functions, firestore, auth, etc.)
 npm run dev:functions
 ```
+Ensure you add the `FB_ADMIN_SERVICE` environment variable to `apps/firebase/environment/.secret.local`. Refer to the instructions below to retrieve it.
 
 ### 3. Deploy
+
+**Firebase Functions**  
+Ensure you add the Firebase Admin SDK environment variable to Google Cloud Secret Manager as `FB_ADMIN_SERVICE` in the form of a flat string:
+
+```bash
+firebase functions:secrets:set FB_ADMIN_SERVICE
+```
+
+To get it, navigate to your Firebase project -> Project Settings -> Service Account -> Firebase Admin SDK -> Generate a New Private Key.  
+You can easily convert the JSON into a flat string using [this tool](https://www.tinylabz.com/tool/json-to-string).  
 
 ```bash
 # Deploy Firebase Functions
