@@ -1,0 +1,58 @@
+@import 'tailwindcss';
+
+@theme {
+  /* Core surface */
+  --color-background: #fefefe;
+  --color-surface: #fafafa;
+  --color-surface-elevated: #f0f1f3;
+  --color-border: #e5e7eb;
+
+  /* Text colors */
+  --color-text: #1b1917;
+  --color-text-muted: #6b7280;
+  --color-text-inverted: #fefefe;
+
+  /* Brand colors */
+  --color-primary: #2d5bff;
+  --color-primary-hover: #5479ff;
+  --color-primary-active: green;
+
+  /* Status colors */
+  --color-success: #00c951;
+  --color-success-accent: #00b347;
+  --color-warning: #ffba00;
+  --color-warning-accent: #e6a500;
+  --color-error: #fb2c36;
+  --color-error-accent: #e6262f;
+
+  /* Font famaily */
+  --font-sans: 'Inter', sans-serif;
+  --font-body: var(--font-sans);
+  --font-heading: var(--font-sans);
+}
+
+/* Dark mode */
+@layer theme {
+  .dark {
+    /* Core surface */
+    --color-background: #fafafa;
+    --color-surface: #f2f2f2;
+    --color-surface-elevated: #ebebeb;
+    --color-border: #e0e0e0;
+
+    /* Text colors */
+    --color-text: #111111;
+    --color-text-muted: #666666;
+    --color-text-inverted: #ffffff;
+
+    /* Brand colors */
+    --color-primary: #000000;
+    --color-primary-hover: #111111;
+    --color-primary-active: #222222;
+
+    /* Status colors */
+    --color-success: green;
+    --color-warning: yellow;
+    --color-error: red;
+  }
+}
