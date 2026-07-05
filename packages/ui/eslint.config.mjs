@@ -7,7 +7,10 @@ export default [
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     // Override or add rules here
-    rules: {},
+    rules: {
+      'no-unused-vars': 'warn',
+      'no-undef': 'error',
+    },
   },
   {
     ignores: ['**/out-tsc'],

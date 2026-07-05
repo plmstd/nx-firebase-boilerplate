@@ -1,7 +1,19 @@
 # @myapp/ui
 
-This library was generated with [Nx](https://nx.dev).
+Minimal shared UI primitives for the application.
 
-## Running unit tests
+## Components
 
-Run `nx test @myapp/ui` to execute the unit tests via [Vitest](https://vitest.dev/).
+The package intentionally starts small:
+
+- `Button`
+- `IconButton`
+- `Input`
+- `Textarea`
+- `Select`
+- `FormField`
+- `Alert`
+- `Spinner`
+
+Add larger or more interactive components only when a real product flow needs
+them.

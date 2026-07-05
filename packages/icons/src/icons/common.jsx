@@ -13,8 +13,11 @@ import {
   LuSettings,
   LuTrash2,
   LuUser,
+  LuTriangleAlert,
+  LuCircleAlert,
   LuX,
 } from 'react-icons/lu';
+import { FiLoader } from 'react-icons/fi';
 import { createIcon } from '../lib/create-icon.jsx';
 
 /** Icon for add/create actions. */
@@ -24,19 +27,13 @@ export const AddIcon = createIcon(LuPlus, 'AddIcon');
 export const CheckIcon = createIcon(LuCheck, 'CheckIcon');
 
 /** Icon for downward disclosure and select controls. */
-export const ChevronDownIcon = createIcon(
-  LuChevronDown,
-  'ChevronDownIcon'
-);
+export const ChevronDownIcon = createIcon(LuChevronDown, 'ChevronDownIcon');
 
 /** Icon for backward navigation. */
 export const ChevronLeftIcon = createIcon(LuChevronLeft, 'ChevronLeftIcon');
 
 /** Icon for forward navigation. */
-export const ChevronRightIcon = createIcon(
-  LuChevronRight,
-  'ChevronRightIcon'
-);
+export const ChevronRightIcon = createIcon(LuChevronRight, 'ChevronRightIcon');
 
 /** Icon for close, dismiss, and cancel actions. */
 export const CloseIcon = createIcon(LuX, 'CloseIcon');
@@ -48,10 +45,7 @@ export const DeleteIcon = createIcon(LuTrash2, 'DeleteIcon');
 export const EditIcon = createIcon(LuPencil, 'EditIcon');
 
 /** Icon for links that navigate outside the current surface. */
-export const ExternalLinkIcon = createIcon(
-  LuExternalLink,
-  'ExternalLinkIcon'
-);
+export const ExternalLinkIcon = createIcon(LuExternalLink, 'ExternalLinkIcon');
 
 /** Icon for informational states or helper text. */
 export const InfoIcon = createIcon(LuInfo, 'InfoIcon');
@@ -70,3 +64,12 @@ export const SettingsIcon = createIcon(LuSettings, 'SettingsIcon');
 
 /** Icon for user, account, or profile surfaces. */
 export const UserIcon = createIcon(LuUser, 'UserIcon');
+
+/** Icon for warning states or helper text. */
+export const WarningIcon = createIcon(LuTriangleAlert, 'WarningIcon');
+
+/** Icon for error states or helper text. */
+export const ErrorIcon = createIcon(LuCircleAlert, 'ErrorIcon');
+
+/** Icon for loading or pending states. */
+export const SpinnerIcon = createIcon(FiLoader, 'SpinnerIcon');

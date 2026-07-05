@@ -1,5 +1,12 @@
+import { SpinnerIcon } from '@myapp/icons';
 import { cn } from '@myapp/utils';
 
-export function Spinner({ className, ...props }) {
-  return <div className={cn('size-5 animate-spin rounded-full border-2 border-border border-t-primary', className)} {...props} />;
+export function Spinner({ className, style = {}, size = '1.2em', ...props }) {
+  return (
+    <SpinnerIcon
+      style={{ fontSize: size, animationDuration: '1.2s', ...style }}
+      className={cn('animate-spin', className)}
+      {...props}
+    />
+  );
 }

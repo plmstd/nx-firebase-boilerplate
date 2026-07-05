@@ -52,9 +52,6 @@
       "path": "../../packages/ui"
     },
     {
-      "path": "../../packages/icons"
-    },
-    {
       "path": "../../packages/styles"
     }
   ]
