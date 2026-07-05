@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { SettingsIcon } from '@myapp/icons';
 import {
   Accordion,
   Alert,
@@ -131,7 +132,9 @@ export default function StylesheetPage() {
               <Button variant="secondary">Secondary</Button>
               <Button variant="ghost">Ghost</Button>
               <Button variant="danger">Danger</Button>
-              <IconButton aria-label="Settings">⚙</IconButton>
+              <IconButton aria-label="Settings">
+                <SettingsIcon />
+              </IconButton>
               <a
                 href="#"
                 className="text-primary underline-offset-2 hover:underline"
