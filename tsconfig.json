@@ -28,6 +28,9 @@
       "path": "./packages/icons"
     },
     {
+      "path": "./packages/stores"
+    },
+    {
       "path": "./packages/ui"
     }
   ]
