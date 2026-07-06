@@ -9,18 +9,18 @@ export function FormField({
   className,
 }) {
   return (
-    <div className={cn('space-y-2.5', className)}>
+    <div className={cn('', className)}>
       {label && (
-        <label className="text-sm font-medium text-text block">
+        <label className="text-sm font-medium text-text block mb-2">
           {label}
           {required ? <span className="ml-1 text-error">*</span> : null}
         </label>
       )}
       {children}
       {error ? (
-        <p className="text-xs text-error">{error}</p>
+        <p className="text-xs text-error mt-2">{error}</p>
       ) : hint ? (
-        <p className="text-xs text-text-muted">{hint}</p>
+        <p className="text-xs text-text-muted mt-2">{hint}</p>
       ) : null}
     </div>
   );
