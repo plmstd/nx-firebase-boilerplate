@@ -14,6 +14,7 @@ The package intentionally starts small:
 - `FormField`
 - `Alert`
 - `Spinner`
+- `ToastProvider`
 - `ModalProvider`
 
 Add larger or more interactive components only when a real product flow needs
@@ -52,4 +53,30 @@ const value = await modal.custom(({ resolve, dismiss }) => (
     </button>
   </div>
 ));
+```
+
+## Toast API
+
+Mount `ToastProvider` once in the app shell. `apps/web` already does this in
+the root layout.
+
+```jsx
+'use client';
+
+import { toast } from '@myapp/ui';
+
+toast.success({
+  title: 'Saved',
+  message: 'Your changes were saved.',
+});
+
+toast.error('Something went wrong');
+
+const id = toast.info({
+  title: 'Upload running',
+  duration: 8000,
+});
+
+toast.dismiss(id);
+toast.clear();
 ```

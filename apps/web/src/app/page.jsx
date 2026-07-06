@@ -9,6 +9,7 @@ import {
   Textarea,
   FormField,
   modal,
+  toast,
 } from '@myapp/ui';
 
 export default function Index() {
@@ -20,6 +21,25 @@ export default function Index() {
       message: 'This is a modal',
       type: 'default',
     });
+  };
+
+  const showToasts = () => {
+    // get random number between 0 and 3
+    const randomNumber = Math.floor(Math.random() * 4);
+    switch (randomNumber) {
+      case 0:
+        toast.success('Success');
+        break;
+      case 1:
+        toast.info('Info');
+        break;
+      case 2:
+        toast.warning('Warning');
+        break;
+      case 3:
+        toast.error('Error');
+        break;
+    }
   };
 
   return (
@@ -58,6 +78,10 @@ export default function Index() {
           <div>
             <h2 className="text-lg font-semibold mb-2">Modal</h2>
             <Button onClick={openModal}>Open Modal</Button>
+          </div>
+          <div>
+            <h2 className="text-lg font-semibold mb-2">Toast</h2>
+            <Button onClick={showToasts}>Show Toasts</Button>
           </div>
         </div>
       </div>
