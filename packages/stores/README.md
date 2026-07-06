@@ -2,47 +2,75 @@
 
 Shared Zustand stores and store helpers for application code.
 
-Use this package for small app-shell state, UI state, and reusable store
-factories. Application code should import shared stores from `@myapp/stores`
-instead of creating duplicate local Zustand stores in feature folders.
+Use this package for shared app-shell state, Firebase Auth state, UI state, and
+small reusable store helpers. Application code should import shared stores from
+`@myapp/stores` instead of creating duplicate local Zustand stores in feature
+folders.
 
-## Client UI Store
+## Auth Store
+
+`useAuthStore` owns the client-side Firebase Auth lifecycle:
+
+- listens to `onAuthStateChanged`
+- exposes `signIn`, `signUp`, and `signOut`
+- subscribes to the authenticated user's Firestore document at `users/{uid}`
+- cleans up the previous user document listener when the auth user changes
+
+Mount `AuthStateProvider` once per app surface. The Next.js app already mounts
+it in `apps/web/src/app/layout.jsx`.
 
 ```jsx
 'use client';
 
-import { useUiStore } from '@myapp/stores';
+import { useAuthStore } from '@myapp/stores';
 
-export function MenuButton() {
-  const sidebarOpen = useUiStore((state) => state.sidebarOpen);
-  const toggleSidebar = useUiStore((state) => state.toggleSidebar);
+export function LoginButton() {
+  const user = useAuthStore((state) => state.user);
+  const signIn = useAuthStore((state) => state.signIn);
+  const signOut = useAuthStore((state) => state.signOut);
 
   return (
-    <button type="button" onClick={toggleSidebar}>
-      {sidebarOpen ? 'Close' : 'Open'}
+    <button
+      type="button"
+      onClick={() =>
+        user
+          ? signOut()
+          : signIn({ email: 'demo@example.com', password: 'password' })
+      }
+    >
+      {user ? 'Sign out' : 'Sign in'}
     </button>
   );
 }
 ```
 
-The global `useUiStore` is intended for client-only UI state that is safe to
-share for the lifetime of a browser tab.
+`signUp` creates the Firebase Auth user and creates or merges a Firestore user
+document by default:
 
-## Scoped Stores
+```js
+const signUp = useAuthStore.getState().signUp;
 
-Use `createStoreContext` for stores that should be scoped to a provider instead
-of living as a global singleton.
-
-```jsx
-'use client';
-
-import { createStoreContext, createUiStore } from '@myapp/stores';
-
-export const {
-  StoreProvider: UiStoreProvider,
-  useBoundStore: useScopedUiStore,
-} = createStoreContext(createUiStore, 'UiStore');
+await signUp({
+  email: 'demo@example.com',
+  password: 'password',
+  displayName: 'Demo User',
+  profile: {
+    role: 'user',
+  },
+});
 ```
 
-This pattern is the safer default for request-, user-, route-, or tenant-scoped
-state in Next.js.
+Pass `createUserDocument: false` if a project creates user documents from a
+backend trigger instead.
+
+## Demo Store
+
+`useDemoStore` is a tiny counter store used by the boilerplate demo screen. It
+can be removed once a real project no longer needs it.
+
+## Firestore Rules
+
+The Firebase rules allow authenticated users to read and write their own
+document at `users/{uid}` and deny all other Firestore access by default. Extend
+`apps/firebase/firestore.rules` when your app introduces additional collections
+or backend-owned user fields.

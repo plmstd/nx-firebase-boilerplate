@@ -17,7 +17,7 @@ packages/
   icons/         Shared project icon set
   modules/       Shared app-level UI modules
   styles/        Shared Tailwind CSS styles
-  stores/        Shared Zustand stores and store helpers
+  stores/        Shared Zustand stores, including Firebase Auth
   ui/            Minimal shared UI primitives
   utils/         Shared utilities (Firebase config, helpers)
 ```
@@ -84,7 +84,7 @@ A Next.js website can be deployed any way you like. The easiest way is using Ver
 | `packages/modules`   | Shared app-level UI modules                         |
 | `packages/ui`        | Minimal shared UI primitives and form controls      |
 | `packages/styles`    | Shared Tailwind CSS theme and global styles         |
-| `packages/stores`    | Shared Zustand stores and store helpers             |
+| `packages/stores`    | Shared Zustand stores, including Firebase Auth      |
 | `packages/api`       | API client for calling backend endpoints            |
 | `packages/backend`   | Shared backend logic used by Cloud Functions        |
 | `packages/constants` | Shared constants (API URLs, config)                 |
@@ -116,12 +116,20 @@ A Next.js website can be deployed any way you like. The easiest way is using Ver
 
 1. Create a project at [Firebase Console](https://console.firebase.google.com)
 2. Enable the services you need (Auth, Firestore, etc.)
+   - Enable Email/Password sign-in if you want to use the included auth store.
 3. Copy your web app config from Project Settings
 4. Run `node setup.mjs` and provide the config values, or manually update:
    - `packages/utils/src/lib/firebase-config.js` — Firebase SDK config
    - `packages/constants/src/lib/urls.js` — API URLs
    - `apps/firebase/project.json` — Firebase CLI project reference
    - `.firebaserc` — Firebase project alias
+
+The boilerplate includes `useAuthStore` in `packages/stores`. It tracks Firebase
+Auth state, exposes Email/Password sign-in, sign-up, and sign-out actions, and
+subscribes to the authenticated user's Firestore document at `users/{uid}`.
+`apps/web/src/app/layout.jsx` mounts `AuthStateProvider` so the listener is
+active for the web app. Firestore rules allow authenticated users to read and
+write their own user document and deny all other documents by default.
 
 Check out [@simondotm/nx-firebase](https://github.com/simondotm/nx-firebase) for more info on the Firebase implementation. It's an awesome package! Thanks, [simondotm](https://github.com/simondotm).
 

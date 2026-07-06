@@ -1,5 +1,6 @@
 import './global.css';
 import '@myapp/styles';
+import { AuthStateProvider } from '@myapp/stores';
 import { ModalProvider, ToastProvider } from '@myapp/ui';
 
 export const metadata = {
@@ -11,6 +12,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
+        <AuthStateProvider />
         {children}
         <ToastProvider />
         <ModalProvider />

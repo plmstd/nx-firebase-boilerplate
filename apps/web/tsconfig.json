@@ -52,6 +52,9 @@
       "path": "../../packages/modules"
     },
     {
+      "path": "../../packages/stores"
+    },
+    {
       "path": "../../packages/ui"
     },
     {
