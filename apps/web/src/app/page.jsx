@@ -1,10 +1,26 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, Alert, Input, Select, Textarea, FormField } from '@myapp/ui';
+import {
+  Button,
+  Alert,
+  Input,
+  Select,
+  Textarea,
+  FormField,
+  modal,
+} from '@myapp/ui';
 
 export default function Index() {
   const [city, setCity] = useState({ value: '1', label: 'New York' });
+
+  const openModal = () => {
+    modal.alert({
+      title: 'Modal',
+      message: 'This is a modal',
+      type: 'default',
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background p-8 text-text">
@@ -39,6 +55,10 @@ export default function Index() {
               <Textarea minHeight="7rem" maxHeight="14rem" />
             </FormField>
           </form>
+          <div>
+            <h2 className="text-lg font-semibold mb-2">Modal</h2>
+            <Button onClick={openModal}>Open Modal</Button>
+          </div>
         </div>
       </div>
     </div>

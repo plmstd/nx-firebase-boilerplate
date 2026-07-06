@@ -49,9 +49,6 @@
   ],
   "references": [
     {
-      "path": "../../packages/icons"
-    },
-    {
       "path": "../../packages/ui"
     },
     {

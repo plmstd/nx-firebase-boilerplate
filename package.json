@@ -69,6 +69,7 @@
     "apps/*"
   ],
   "dependencies": {
+    "@headlessui/react": "^2.2.10",
     "@tailwindcss/postcss": "^4.2.1",
     "axios": "^1.13.6",
     "clsx": "^2.1.1",
