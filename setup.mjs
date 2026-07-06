@@ -177,6 +177,21 @@ async function main() {
 
   const changed = await replaceInFiles(files, replacements);
   console.log(`         Updated ${changed} files.\n`);
+  const workspacePackages = [];
+  for (const file of files) {
+    if (!file.endsWith('/package.json')) continue;
+    try {
+      const pkg = JSON.parse(await readFile(file, 'utf-8'));
+      if (pkg.name?.startsWith(`${scope}/`)) {
+        workspacePackages.push(pkg.name);
+      }
+    } catch {
+      // Ignore malformed package files; setup should continue replacing text.
+    }
+  }
+  console.log(
+    `         Renamed workspace packages: ${workspacePackages.sort().join(', ')}\n`
+  );
 
   console.log('  [3/7] Updating Firebase config...');
   const configPath = join(

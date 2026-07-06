@@ -15,6 +15,7 @@ packages/
   backend/       Shared backend utilities
   constants/     Shared constants (URLs, config values)
   icons/         Shared project icon set
+  modules/       Shared app-level UI modules
   styles/        Shared Tailwind CSS styles
   stores/        Shared Zustand stores and store helpers
   ui/            Minimal shared UI primitives
@@ -80,6 +81,7 @@ A Next.js website can be deployed any way you like. The easiest way is using Ver
 | `apps/functions`     | Firebase Cloud Functions — API routes, triggers     |
 | `apps/firebase`      | Firebase config — rules, indexes, emulator data     |
 | `packages/icons`     | Project-owned React icon components                 |
+| `packages/modules`   | Shared app-level UI modules                         |
 | `packages/ui`        | Minimal shared UI primitives and form controls      |
 | `packages/styles`    | Shared Tailwind CSS theme and global styles         |
 | `packages/stores`    | Shared Zustand stores and store helpers             |
