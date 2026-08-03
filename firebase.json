@@ -23,7 +23,7 @@
     {
       "codebase": "functions",
       "source": "apps/functions/dist",
-      "runtime": "nodejs20",
+      "runtime": "nodejs22",
       "ignore": ["*.local"]
     }
   ],

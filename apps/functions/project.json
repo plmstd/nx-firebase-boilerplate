@@ -28,7 +28,7 @@
         "platform": "node",
         "bundle": true,
         "thirdParty": true,
-        "target": "node20",
+        "target": "node22",
         "format": ["esm"],
         "esbuildOptions": {
           "logLevel": "info",
