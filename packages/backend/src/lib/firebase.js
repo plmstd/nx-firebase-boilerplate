@@ -28,7 +28,7 @@ export const getAuth = () => getAdmin().auth();
 
 // firebase firestore
 /** @returns {import('firebase-admin/firestore').Firestore} */
-export const getDatabase = (databaseId = 'db-v2') => {
+export const getDatabase = (databaseId) => {
   const app = getAdmin();
   const db = getFirestore(app, databaseId);
   return db;
