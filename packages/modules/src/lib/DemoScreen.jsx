@@ -2,88 +2,127 @@
 
 import { useState } from 'react';
 import {
-  Button,
   Alert,
+  Badge,
+  Button,
+  FormField,
+  H1,
+  H2,
   Input,
   Select,
+  Surface,
+  Text,
   Textarea,
-  FormField,
   modal,
   toast,
 } from '@myapp/ui';
 
-export const DemoScreen = () => {
-  const [city, setCity] = useState({ value: '1', label: 'New York' });
+/**
+ * Product-neutral starter screen that verifies the shared UI providers and
+ * demonstrates how app-level modules compose design-system primitives.
+ */
+export function DemoScreen() {
+  const [city, setCity] = useState('new-york');
 
-  const openModal = () => {
-    modal.alert({
-      title: 'Modal',
-      message: 'This is a modal',
+  async function openModal() {
+    const confirmed = await modal.confirm({
+      title: 'Continue with this example?',
+      message: 'The modal is provided by the shared UI package.',
       type: 'default',
+      confirmText: 'Continue',
     });
-  };
 
-  const showToasts = () => {
-    // get random number between 0 and 3
-    const randomNumber = Math.floor(Math.random() * 4);
-    switch (randomNumber) {
-      case 0:
-        toast.success('Success');
-        break;
-      case 1:
-        toast.info('Info');
-        break;
-      case 2:
-        toast.warning('Warning');
-        break;
-      case 3:
-        toast.error('Error');
-        break;
+    if (confirmed) {
+      toast.success('Example confirmed');
     }
-  };
+  }
+
+  function showToasts() {
+    toast.info({
+      title: 'Design-system starter',
+      message: 'Tokens and primitives are ready to customize.',
+      action: {
+        label: 'View kit',
+        onClick: () => {
+          window.location.href = '/ui-kit';
+        },
+      },
+    });
+  }
 
   return (
-    <div>
-      {' '}
-      <Alert className="mb-4">This is an alert</Alert>
-      <div className="flex flex-col gap-4 rounded-xl bg-surface p-6">
-        <h1 className="text-2xl font-semibold">My App</h1>
-        <p className="text-text-muted">
-          Start building with the shared styles and minimal UI primitives.
-        </p>
-        <div>
-          <Button>Get Started</Button>
-        </div>
-        <form className="space-y-4">
-          <FormField label="Name" hint="Enter your name">
-            <Input />
-          </FormField>
-          <FormField label="City">
-            <Select
-              options={[
-                { value: '1', label: 'New York' },
-                { value: '2', label: 'Los Angeles' },
-                { value: '3', label: 'Chicago' },
-                { value: '4', label: 'Houston' },
-                { value: '5', label: 'Miami' },
-              ]}
-              value={city}
-              onChange={(value) => setCity(value)}
-            />
-          </FormField>
-          <FormField label="Message">
-            <Textarea minHeight="7rem" maxHeight="14rem" />
-          </FormField>
-        </form>
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Modal</h2>
-          <Button onClick={openModal}>Open Modal</Button>
-        </div>
-        <div>
-          <h2 className="text-lg font-semibold mb-2">Toast</h2>
-          <Button onClick={showToasts}>Show Toasts</Button>
-        </div>
-      </div>
+    <div className="space-y-5">
+      <Alert>
+        Customize the semantic theme in{' '}
+        <code className="font-medium">packages/styles/src/variables.css</code>.
+      </Alert>
+
+      <Surface className="space-y-8">
+        <header className="space-y-4">
+          <Badge dot>Boilerplate</Badge>
+          <div className="space-y-3">
+            <H1>My App</H1>
+            <Text variant="lead" tone="muted" className="max-w-2xl">
+              Start with a semantic theme and a focused set of accessible UI
+              primitives, then shape them around the product you are building.
+            </Text>
+          </div>
+          <div className="flex flex-wrap gap-3">
+            <Button>Get started</Button>
+            <Button href="/ui-kit" variant="secondary">
+              Explore the UI kit
+            </Button>
+          </div>
+        </header>
+
+        <section className="border-t border-border pt-7">
+          <H2 className="mb-5">Form example</H2>
+          <form className="grid gap-5 sm:grid-cols-2">
+            <FormField
+              label="Name"
+              labelFor="demo-name"
+              hint="Enter a display name."
+            >
+              <Input id="demo-name" placeholder="Ada Lovelace" />
+            </FormField>
+            <FormField label="City" labelFor="demo-city">
+              <Select
+                id="demo-city"
+                options={[
+                  { value: 'new-york', label: 'New York' },
+                  { value: 'los-angeles', label: 'Los Angeles' },
+                  { value: 'chicago', label: 'Chicago' },
+                  { value: 'houston', label: 'Houston' },
+                  { value: 'miami', label: 'Miami' },
+                ]}
+                value={city}
+                onChange={setCity}
+              />
+            </FormField>
+            <FormField
+              label="Message"
+              labelFor="demo-message"
+              className="sm:col-span-2"
+            >
+              <Textarea
+                id="demo-message"
+                minHeight="7rem"
+                maxHeight="14rem"
+                placeholder="Add a short message…"
+              />
+            </FormField>
+          </form>
+        </section>
+
+        <section className="flex flex-wrap gap-3 border-t border-border pt-7">
+          <Button variant="secondary" onClick={openModal}>
+            Open modal
+          </Button>
+          <Button variant="secondary" onClick={showToasts}>
+            Show toast
+          </Button>
+        </section>
+      </Surface>
     </div>
   );
-};
+}

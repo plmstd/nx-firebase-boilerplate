@@ -1,58 +1,87 @@
 @reference "tailwindcss";
 
+/*
+ * This file is the primary customization surface for a cloned project.
+ * Keep component code on semantic roles such as `surface`, `text-muted`, or
+ * `success-strong`, and adjust the concrete values here to create a new theme.
+ */
 @theme {
-  /* Core surface */
-  --color-background: #fefefe;
-  --color-surface: #fafafa;
-  --color-surface-elevated: #f0f1f3;
-  --color-border: #e5e7eb;
+  /* Neutral foundations */
+  --color-background: #ffffff;
+  --color-surface: #fbfbfa;
+  --color-surface-soft: #f0f0f0;
+  --color-surface-elevated: #ffffff;
+  --color-border: #deded9;
+  --color-border-strong: #bcbcb6;
 
-  /* Text colors */
-  --color-text: #1b1917;
-  --color-text-muted: #6b7280;
-  --color-text-inverted: #fefefe;
+  /* Content */
+  --color-text: #11110f;
+  --color-text-muted: #686963;
+  --color-text-subtle: #92938d;
+  --color-text-inverted: #ffffff;
 
-  /* Brand colors */
-  --color-primary: #2d5bff;
-  --color-primary-hover: #5479ff;
-  --color-primary-active: green;
+  /* Primary actions. Override these values for the cloned app's brand. */
+  --color-primary: #11110f;
+  --color-primary-hover: #292925;
+  --color-primary-active: #3a3a35;
+  --color-focus: #55564f;
 
-  /* Status colors */
-  --color-success: #00c951;
-  --color-success-accent: #00b347;
-  --color-warning: #ffba00;
-  --color-warning-accent: #e6a500;
-  --color-error: #fb2c36;
-  --color-error-accent: #e6262f;
+  /* Semantic states. Keep these roles distinct from decorative brand color. */
+  --color-success: #33762f;
+  --color-success-soft: #edf4eb;
+  --color-success-strong: #275c24;
+  --color-warning: #efa400;
+  --color-warning-soft: #fff4dd;
+  --color-warning-strong: #875b00;
+  --color-error: #be3838;
+  --color-error-soft: #faecec;
+  --color-error-strong: #8d2626;
 
-  /* Font famaily */
-  --font-sans: 'Inter', sans-serif;
+  /* Type */
+  --font-sans: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
   --font-body: var(--font-sans);
   --font-heading: var(--font-sans);
-}
 
-/* Dark mode */
-@layer theme {
-  .dark {
-    /* Core surface */
-    --color-background: #fafafa;
-    --color-surface: #f2f2f2;
-    --color-surface-elevated: #ebebeb;
-    --color-border: #e0e0e0;
+  --text-display: 3.75rem;
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.045em;
+  --text-heading-1: clamp(2.75rem, 2.2rem + 2.75vw, 3.75rem);
+  --text-heading-1--line-height: 1.05;
+  --text-heading-1--letter-spacing: -0.04em;
+  --text-heading-2: 2.5rem;
+  --text-heading-2--line-height: 1.08;
+  --text-heading-2--letter-spacing: -0.035em;
+  --text-heading-3: 2rem;
+  --text-heading-3--line-height: 1.12;
+  --text-heading-3--letter-spacing: -0.03em;
+  --text-heading-4: 1.5rem;
+  --text-heading-4--line-height: 1.2;
+  --text-heading-4--letter-spacing: -0.02em;
+  --text-heading-5: 1.25rem;
+  --text-heading-5--line-height: 1.3;
+  --text-heading-5--letter-spacing: -0.015em;
+  --text-heading-6: 1.125rem;
+  --text-heading-6--line-height: 1.4;
+  --text-heading-6--letter-spacing: -0.01em;
+  --text-lead: 1.625rem;
+  --text-lead--line-height: 1.3;
+  --text-lead--letter-spacing: -0.025em;
+  --text-body-lg: 1.125rem;
+  --text-body-lg--line-height: 1.6;
+  --text-body: 1rem;
+  --text-body--line-height: 1.6;
+  --text-body-sm: 0.875rem;
+  --text-body-sm--line-height: 1.5;
+  --text-label: 0.875rem;
+  --text-label--line-height: 1.25;
+  --text-caption: 0.75rem;
+  --text-caption--line-height: 1.4;
 
-    /* Text colors */
-    --color-text: #111111;
-    --color-text-muted: #666666;
-    --color-text-inverted: #ffffff;
-
-    /* Brand colors */
-    --color-primary: #000000;
-    --color-primary-hover: #111111;
-    --color-primary-active: #222222;
-
-    /* Status colors */
-    --color-success: green;
-    --color-warning: yellow;
-    --color-error: red;
-  }
+  /* Shape and elevation */
+  --radius-control: 0.375rem;
+  --radius-surface: 0.5rem;
+  --shadow-control: 0 1px 1px rgb(17 17 15 / 0.05);
+  --shadow-toast:
+    0 4px 14px rgb(17 17 15 / 0.09), 0 1px 2px rgb(17 17 15 / 0.06);
+  --shadow-overlay: 0 18px 48px rgb(17 17 15 / 0.14);
 }

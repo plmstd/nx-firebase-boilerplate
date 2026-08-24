@@ -1,10 +1,50 @@
 @import 'tailwindcss';
-@import './variables.css';
 @import './fonts.css';
+@import './variables.css';
+
 @source '../../ui/';
 @source '../../modules/';
 @source '../../icons/';
 
-body {
-  @apply font-body;
+@keyframes toast-progress {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    background: var(--color-background);
+  }
+
+  body {
+    min-height: 100vh;
+    margin: 0;
+    background: var(--color-background);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    font-optical-sizing: auto;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  ::selection {
+    background: var(--color-text);
+    color: var(--color-text-inverted);
+  }
 }

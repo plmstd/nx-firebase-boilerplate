@@ -1,42 +1,58 @@
 'use client';
 
-import { cn } from '@myapp/utils';
+import { forwardRef, useState } from 'react';
 import { ChevronDownIcon } from '@myapp/icons';
-import { useState } from 'react';
+import { cn } from '@myapp/utils';
 
-export function Select({ className, ...props }) {
+/**
+ * Styled native select. `className` customizes the root while
+ * `triggerClassName` customizes the visible control surface.
+ */
+export const Select = forwardRef(function Select(
+  { className, triggerClassName, placeholder = 'Select', ...props },
+  ref,
+) {
   return (
-    <HeadlessSelect className={cn('w-full', className)} {...props}>
+    <HeadlessSelect ref={ref} className={cn('w-full', className)} {...props}>
       {({ selectedOption, hover, disabled, focused }) => (
         <div
           className={cn(
-            'flex items-center justify-between gap-2 h-10 w-full border border-border bg-background px-3 text-sm placeholder:text-text-muted rounded-lg',
-            hover && !disabled && '',
+            'flex h-10 w-full items-center justify-between gap-2 rounded-control border border-border-strong bg-surface-elevated px-3 text-sm text-text shadow-control transition-[color,background-color,border-color,box-shadow,transform] duration-150 ease-out group-active:scale-[0.99] group-active:duration-75 motion-reduce:transform-none',
+            hover && !disabled && 'border-text-subtle bg-surface/50',
             focused &&
               !disabled &&
-              'outline-none ring-2 ring-primary ring-offset-2',
-            disabled && '',
+              'outline-none ring-2 ring-focus ring-offset-2 ring-offset-background',
+            disabled && 'opacity-50 group-active:scale-100',
+            triggerClassName,
           )}
         >
-          <span>{selectedOption?.label ?? 'Select'}</span>
-          <ChevronDownIcon />
+          <span>{selectedOption?.label ?? placeholder}</span>
+          <ChevronDownIcon className="text-text-muted" aria-hidden="true" />
         </div>
       )}
     </HeadlessSelect>
   );
-}
+});
 
-export function HeadlessSelect({
-  id,
-  value,
-  options,
-  onChange,
-  children,
-  className,
-  selectClassName,
-  disabled = false,
-  ...selectProps
-}) {
+Select.displayName = 'Select';
+
+/**
+ * Accessible native select overlay for callers that need a custom trigger.
+ */
+export const HeadlessSelect = forwardRef(function HeadlessSelect(
+  {
+    id,
+    value,
+    options = [],
+    onChange,
+    children,
+    className,
+    selectClassName,
+    disabled = false,
+    ...selectProps
+  },
+  ref,
+) {
   const [hover, setHover] = useState(false);
   const [focused, setFocused] = useState(false);
 
@@ -58,13 +74,14 @@ export function HeadlessSelect({
 
   return (
     <div
-      className={cn('relative inline-block', className)}
+      className={cn('group relative inline-block', className)}
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
       {trigger}
 
       <select
+        ref={ref}
         id={id}
         value={value}
         disabled={disabled}
@@ -78,8 +95,8 @@ export function HeadlessSelect({
           onBlur?.(event);
         }}
         className={cn(
-          'absolute inset-0 h-full w-full opacity-0',
-          disabled ? 'cursor-wait' : 'cursor-pointer',
+          'absolute inset-0 h-full w-full touch-manipulation opacity-0',
+          disabled ? 'cursor-not-allowed' : 'cursor-pointer',
           selectClassName,
         )}
         {...restSelectProps}
@@ -96,4 +113,6 @@ export function HeadlessSelect({
       </select>
     </div>
   );
-}
+});
+
+HeadlessSelect.displayName = 'HeadlessSelect';

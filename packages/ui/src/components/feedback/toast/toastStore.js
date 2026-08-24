@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-const DEFAULT_DURATION = 5000;
+export const DEFAULT_TOAST_DURATION = 4500;
 
 let toastCounter = 0;
 
@@ -9,34 +9,102 @@ function createToastId() {
   return `toast-${Date.now().toString(36)}-${toastCounter}`;
 }
 
-function normalizeToast(input, variant) {
-  const options = typeof input === 'string' ? { message: input } : input || {};
+function toOptions(input) {
+  return typeof input === 'string' ? { message: input } : input || {};
+}
+
+function normalizeToast(input, variant, id, existingToast) {
+  const options = toOptions(input);
+  const type = options.type || variant || existingToast?.type || 'default';
+  const durationWasProvided = options.duration !== undefined;
+
+  const duration = durationWasProvided
+    ? options.duration
+    : type === 'loading'
+      ? Infinity
+      : existingToast?.type === 'loading'
+        ? DEFAULT_TOAST_DURATION
+        : (existingToast?.duration ?? DEFAULT_TOAST_DURATION);
 
   return {
-    id: options.id || createToastId(),
-    title: options.title,
-    message: options.message,
-    type: options.type || variant || 'default',
-    duration:
-      options.duration === undefined ? DEFAULT_DURATION : options.duration,
+    ...existingToast,
+    id,
+    title: options.title !== undefined ? options.title : existingToast?.title,
+    message:
+      options.message !== undefined ? options.message : existingToast?.message,
+    type,
+    duration,
+    dismissible:
+      options.dismissible !== undefined
+        ? options.dismissible
+        : (existingToast?.dismissible ?? true),
+    action:
+      options.action !== undefined ? options.action : existingToast?.action,
+    icon: options.icon !== undefined ? options.icon : existingToast?.icon,
+    className:
+      options.className !== undefined
+        ? options.className
+        : existingToast?.className,
+    style: options.style !== undefined ? options.style : existingToast?.style,
+    onDismiss:
+      options.onDismiss !== undefined
+        ? options.onDismiss
+        : existingToast?.onDismiss,
+    onAutoClose:
+      options.onAutoClose !== undefined
+        ? options.onAutoClose
+        : existingToast?.onAutoClose,
     status: 'open',
+    revision: (existingToast?.revision || 0) + 1,
+    updatedAt: Date.now(),
   };
 }
 
+function getToastId(input) {
+  return toOptions(input).id || createToastId();
+}
+
+function upsertToast(toasts, input, variant, id) {
+  const existingIndex = toasts.findIndex((toast) => toast.id === id);
+  const existingToast = existingIndex >= 0 ? toasts[existingIndex] : undefined;
+  const toast = normalizeToast(input, variant, id, existingToast);
+
+  if (existingIndex >= 0) {
+    return toasts.map((item, index) =>
+      index === existingIndex ? toast : item,
+    );
+  }
+
+  return [toast, ...toasts];
+}
+
+/** Shared toast state used by the imperative API and mounted provider. */
 export const useToastStore = create((set) => ({
   toasts: [],
   push: (input, variant) => {
-    const toast = normalizeToast(input, variant);
+    const id = getToastId(input);
 
     set((state) => ({
-      toasts: [
-        toast,
-        ...state.toasts.filter((existingToast) => existingToast.id !== toast.id),
-      ],
+      toasts: upsertToast(state.toasts, input, variant, id),
     }));
 
-    return toast.id;
+    return id;
   },
+  update: (id, input) =>
+    set((state) => {
+      if (!state.toasts.some((toast) => toast.id === id)) {
+        return state;
+      }
+
+      return {
+        toasts: upsertToast(
+          state.toasts,
+          { ...toOptions(input), id },
+          undefined,
+          id,
+        ),
+      };
+    }),
   dismiss: (id) =>
     set((state) => ({
       toasts: state.toasts.map((toast) => {

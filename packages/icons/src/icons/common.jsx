@@ -1,5 +1,6 @@
 import {
   LuCheck,
+  LuCircleCheckBig,
   LuChevronDown,
   LuChevronLeft,
   LuChevronRight,
@@ -18,6 +19,7 @@ import {
   LuX,
 } from 'react-icons/lu';
 import { FiLoader } from 'react-icons/fi';
+import { GoDotFill } from 'react-icons/go';
 import { createIcon } from '../lib/create-icon.jsx';
 
 /** Icon for add/create actions. */
@@ -25,6 +27,9 @@ export const AddIcon = createIcon(LuPlus, 'AddIcon');
 
 /** Icon for successful, selected, or confirmed states. */
 export const CheckIcon = createIcon(LuCheck, 'CheckIcon');
+
+/** Icon for visibly confirmed or completed states. */
+export const CheckCircleIcon = createIcon(LuCircleCheckBig, 'CheckCircleIcon');
 
 /** Icon for downward disclosure and select controls. */
 export const ChevronDownIcon = createIcon(LuChevronDown, 'ChevronDownIcon');
@@ -73,3 +78,6 @@ export const ErrorIcon = createIcon(LuCircleAlert, 'ErrorIcon');
 
 /** Icon for loading or pending states. */
 export const SpinnerIcon = createIcon(FiLoader, 'SpinnerIcon');
+
+/** Compact filled dot used for status indicators and legends. */
+export const StatusDotIcon = createIcon(GoDotFill, 'StatusDotIcon');

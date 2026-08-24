@@ -49,13 +49,19 @@
   ],
   "references": [
     {
+      "path": "../../packages/utils"
+    },
+    {
+      "path": "../../packages/icons"
+    },
+    {
       "path": "../../packages/modules"
     },
     {
-      "path": "../../packages/stores"
+      "path": "../../packages/ui"
     },
     {
-      "path": "../../packages/ui"
+      "path": "../../packages/stores"
     },
     {
       "path": "../../packages/styles"

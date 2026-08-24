@@ -3,32 +3,29 @@
 import { DialogTitle } from '@headlessui/react';
 import { cn } from '@myapp/utils';
 import { Button } from '../primitives/Button';
+import { H6 } from '../typography/Heading';
+import { Text } from '../typography/Text';
 import { ModalIcon } from './ModalIcon';
 import { useModalStore } from './modalStore';
 
-/**
- * Built-in alert modal content for one-action status messages.
- */
+/** Built-in alert modal content for one-action status messages. */
 export function ModalAlert() {
   const modal = useModalStore((state) => state.modal);
   const resolve = useModalStore((state) => state.resolve);
 
   return (
     <div className="space-y-5">
-      <div className="flex gap-3 items-start">
+      <div className="flex items-start gap-3">
         <ModalIcon type={modal?.type} />
         <div className="min-w-0 space-y-2">
-          <DialogTitle
-            className={cn(
-              'text-base font-semibold text-text',
-              !modal?.title && 'sr-only',
-            )}
-          >
+          <H6 as={DialogTitle} className={cn(!modal?.title && 'sr-only')}>
             {modal?.title || 'Alert'}
-          </DialogTitle>
-          {modal?.message && (
-            <p className="text-sm leading-6 text-text-muted">{modal.message}</p>
-          )}
+          </H6>
+          {modal?.message ? (
+            <Text variant="bodySm" tone="muted">
+              {modal.message}
+            </Text>
+          ) : null}
         </div>
       </div>
 

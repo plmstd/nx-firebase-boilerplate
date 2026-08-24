@@ -24,6 +24,11 @@ export function SettingsButton() {
 Icons are decorative by default. Pass `aria-label`, `aria-labelledby`, or
 `title` when an icon itself needs an accessible name.
 
+Status and feedback primitives use the generic `CheckCircleIcon` and
+`StatusDotIcon` exports. Product-specific icons should only be added when a
+real product flow requires them; they are not part of the boilerplate starter
+by default.
+
 ## Adding Icons
 
 Add new icons in `src/icons/common.jsx` using `createIcon`:

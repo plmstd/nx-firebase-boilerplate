@@ -16,9 +16,9 @@ packages/
   constants/     Shared constants (URLs, config values)
   icons/         Shared project icon set
   modules/       Shared app-level UI modules
-  styles/        Shared Tailwind CSS styles
+  styles/        Semantic design tokens and shared Tailwind CSS styles
   stores/        Shared Zustand stores, including Firebase Auth
-  ui/            Minimal shared UI primitives
+  ui/            Shared UI primitives, typography, feedback, and overlays
   utils/         Shared utilities (Firebase config, helpers)
 ```
 
@@ -52,6 +52,7 @@ npm run dev:web
 # Start Firebase emulators (functions, firestore, auth, etc.)
 npm run dev:functions
 ```
+
 Ensure you add the `FB_ADMIN_SERVICE` environment variable to `apps/firebase/environment/.secret.local`. Refer to the instructions below to retrieve it.
 
 ### 3. Deploy
@@ -64,7 +65,7 @@ firebase functions:secrets:set FB_ADMIN_SERVICE
 ```
 
 To get it, navigate to your Firebase project -> Project Settings -> Service Account -> Firebase Admin SDK -> Generate a New Private Key.  
-You can easily convert the JSON into a flat string using [this tool](https://www.tinylabz.com/tool/json-to-string).  
+You can easily convert the JSON into a flat string using [this tool](https://www.tinylabz.com/tool/json-to-string).
 
 ```bash
 # Deploy Firebase Functions
@@ -82,8 +83,8 @@ A Next.js website can be deployed any way you like. The easiest way is using Ver
 | `apps/firebase`      | Firebase config — rules, indexes, emulator data     |
 | `packages/icons`     | Project-owned React icon components                 |
 | `packages/modules`   | Shared app-level UI modules                         |
-| `packages/ui`        | Minimal shared UI primitives and form controls      |
-| `packages/styles`    | Shared Tailwind CSS theme and global styles         |
+| `packages/ui`        | Shared UI primitives, forms, feedback, and overlays |
+| `packages/styles`    | Semantic design tokens and global styles            |
 | `packages/stores`    | Shared Zustand stores, including Firebase Auth      |
 | `packages/api`       | API client for calling backend endpoints            |
 | `packages/backend`   | Shared backend logic used by Cloud Functions        |
@@ -111,6 +112,26 @@ A Next.js website can be deployed any way you like. The easiest way is using Ver
 - **Tailwind CSS** 4 — utility-first CSS framework
 - **esbuild** — fast bundling for Cloud Functions
 - **Vite** — build tooling for shared packages
+
+## Design-System Starter
+
+The boilerplate includes a neutral design-system foundation intended to be
+customized after cloning:
+
+- semantic tokens for surfaces, content, actions, status, typography, shape,
+  and elevation
+- reusable typography, action, form, feedback, modal, and toast primitives
+- consistent focus, disabled, loading, press, and reduced-motion behavior
+- a living component gallery at `/ui-kit`
+
+Start by changing the concrete values in
+`packages/styles/src/variables.css`. Components use stable semantic roles such
+as `bg-surface` and `text-error-strong`, so a cloned project can establish its
+visual identity without restyling each component.
+
+Keep domain-neutral primitives in `packages/ui` and product-aware compositions
+in `packages/modules`. The full extension and override conventions are
+documented in [`docs/DESIGN_SYSTEM.md`](docs/DESIGN_SYSTEM.md).
 
 ## Firebase Setup
 
