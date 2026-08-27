@@ -43,6 +43,13 @@ The setup script will interactively ask for:
 
 It then renames everything, installs dependencies, reinitializes git, and creates an initial commit.
 
+The setup also assigns project-specific local ports from the range
+`20000`–`39999` and verifies their current availability when the environment
+permits local port probes. The assigned web and Firebase Emulator ports are
+stored in `local-development.json` and applied to every relevant development
+command and local API URL. This lets independently initialized projects run at
+the same time without using or terminating each other's ports.
+
 ### 2. Develop
 
 ```bash
@@ -52,6 +59,9 @@ npm run dev:web
 # Start Firebase emulators (functions, firestore, auth, etc.)
 npm run dev:functions
 ```
+
+After setup, check `local-development.json` for the exact local ports. The
+setup summary also prints the web URL and Functions Emulator port.
 
 Ensure you add the `FB_ADMIN_SERVICE` environment variable to `apps/firebase/environment/.secret.local`. Refer to the instructions below to retrieve it.
 
@@ -76,20 +86,21 @@ A Next.js website can be deployed any way you like. The easiest way is using Ver
 
 ## Project Structure
 
-| Path                 | Description                                         |
-| -------------------- | --------------------------------------------------- |
-| `apps/web`           | Next.js frontend — pages, layouts, styles           |
-| `apps/functions`     | Firebase Cloud Functions — API routes, triggers     |
-| `apps/firebase`      | Firebase config — rules, indexes, emulator data     |
-| `packages/icons`     | Project-owned React icon components                 |
-| `packages/modules`   | Shared app-level UI modules                         |
-| `packages/ui`        | Shared UI primitives, forms, feedback, and overlays |
-| `packages/styles`    | Semantic design tokens and global styles            |
-| `packages/stores`    | Shared Zustand stores, including Firebase Auth      |
-| `packages/api`       | API client for calling backend endpoints            |
-| `packages/backend`   | Shared backend logic used by Cloud Functions        |
-| `packages/constants` | Shared constants (API URLs, config)                 |
-| `packages/utils`     | Utilities (Firebase init, `cn` helper, etc.)        |
+| Path                     | Description                                         |
+| ------------------------ | --------------------------------------------------- |
+| `apps/web`               | Next.js frontend — pages, layouts, styles           |
+| `apps/functions`         | Firebase Cloud Functions — API routes, triggers     |
+| `apps/firebase`          | Firebase config — rules, indexes, emulator data     |
+| `local-development.json` | Assigned ports for local development                |
+| `packages/icons`         | Project-owned React icon components                 |
+| `packages/modules`       | Shared app-level UI modules                         |
+| `packages/ui`            | Shared UI primitives, forms, feedback, and overlays |
+| `packages/styles`        | Semantic design tokens and global styles            |
+| `packages/stores`        | Shared Zustand stores, including Firebase Auth      |
+| `packages/api`           | API client for calling backend endpoints            |
+| `packages/backend`       | Shared backend logic used by Cloud Functions        |
+| `packages/constants`     | Shared constants (API URLs, config)                 |
+| `packages/utils`         | Utilities (Firebase init, `cn` helper, etc.)        |
 
 ## Available Scripts
 

@@ -4,6 +4,8 @@ import { readdir, readFile, writeFile, rm } from 'fs/promises';
 import { join, extname } from 'path';
 import { createInterface } from 'readline';
 import { execSync } from 'child_process';
+import { randomInt } from 'crypto';
+import { createServer } from 'net';
 
 const ROOT = new URL('.', import.meta.url).pathname.replace(/\/$/, '');
 
@@ -39,6 +41,22 @@ const CURRENT = {
   firebaseProjectId: 'my-firebase-project',
   displayName: 'My App',
 };
+
+const LOCAL_PORT_MIN = 20000;
+const LOCAL_PORT_MAX = 39999;
+const FIREBASE_EMULATOR_NAMES = [
+  'auth',
+  'functions',
+  'firestore',
+  'database',
+  'hosting',
+  'pubsub',
+  'storage',
+  'eventarc',
+  'ui',
+  'hub',
+  'logging',
+];
 
 const rl = createInterface({ input: process.stdin, output: process.stdout });
 const ask = (question) =>
@@ -89,6 +107,60 @@ function validateProjectId(id) {
   if (!/^[a-z0-9][a-z0-9-]*$/.test(id))
     return 'Project ID must be lowercase alphanumeric with hyphens, starting with a letter or number';
   return null;
+}
+
+function isPortAvailable(port) {
+  return new Promise((resolve, reject) => {
+    const server = createServer();
+
+    server.unref();
+    server.once('error', (error) => {
+      if (error.code === 'EADDRINUSE') {
+        resolve(false);
+        return;
+      }
+
+      // Some restricted shells prohibit local listeners altogether. The
+      // generated high port is still valid, but cannot be probed there.
+      if (error.code === 'EACCES' || error.code === 'EPERM') {
+        resolve(true);
+        return;
+      }
+
+      reject(error);
+    });
+    server.listen({ port, host: '127.0.0.1', exclusive: true }, () =>
+      server.close(() => resolve(true)),
+    );
+  });
+}
+
+async function allocateAvailablePort(allocatedPorts) {
+  for (let attempt = 0; attempt < 100; attempt++) {
+    const port = randomInt(LOCAL_PORT_MIN, LOCAL_PORT_MAX + 1);
+    if (allocatedPorts.has(port)) continue;
+    if (!(await isPortAvailable(port))) continue;
+
+    allocatedPorts.add(port);
+    return port;
+  }
+
+  throw new Error(
+    `Could not find an available local port between ${LOCAL_PORT_MIN} and ${LOCAL_PORT_MAX}`,
+  );
+}
+
+async function createLocalDevelopmentConfig() {
+  const allocatedPorts = new Set();
+  const webPort = await allocateAvailablePort(allocatedPorts);
+  const firebaseEmulatorPorts = {};
+
+  for (const emulatorName of FIREBASE_EMULATOR_NAMES) {
+    firebaseEmulatorPorts[emulatorName] =
+      await allocateAvailablePort(allocatedPorts);
+  }
+
+  return { webPort, firebaseEmulatorPorts };
 }
 
 async function main() {
@@ -147,6 +219,8 @@ async function main() {
 
   rl.close();
 
+  const localDevelopment = await createLocalDevelopmentConfig();
+
   // --- Confirm ---
 
   console.log('');
@@ -160,6 +234,10 @@ async function main() {
   console.log(`    Measurement ID:     ${measurementId || '(skip)'}`);
   console.log(`    Production API URL: ${productionApiUrl || '(skip)'}`);
   console.log(`    Git remote:         ${gitRemote || '(skip)'}`);
+  console.log(`    Web port:           ${localDevelopment.webPort}`);
+  console.log(
+    `    Functions port:     ${localDevelopment.firebaseEmulatorPorts.functions}`,
+  );
   console.log('');
 
   // --- Execute ---
@@ -193,7 +271,7 @@ async function main() {
     `         Renamed workspace packages: ${workspacePackages.sort().join(', ')}\n`
   );
 
-  console.log('  [3/7] Updating Firebase config...');
+  console.log('  [3/7] Updating Firebase and local development config...');
   const configPath = join(
     ROOT,
     'packages/utils/src/lib/firebase-config.js'
@@ -248,6 +326,65 @@ async function main() {
     JSON.stringify(firebaseRc, null, 2) + '\n',
     'utf-8'
   );
+
+  await writeFile(
+    join(ROOT, 'local-development.json'),
+    JSON.stringify(localDevelopment, null, 2) + '\n',
+    'utf-8',
+  );
+
+  const firebaseConfigPath = join(ROOT, 'firebase.json');
+  const firebaseConfig = JSON.parse(
+    await readFile(firebaseConfigPath, 'utf-8'),
+  );
+  for (const [emulatorName, port] of Object.entries(
+    localDevelopment.firebaseEmulatorPorts,
+  )) {
+    firebaseConfig.emulators[emulatorName] = {
+      ...firebaseConfig.emulators[emulatorName],
+      port,
+    };
+  }
+  await writeFile(
+    firebaseConfigPath,
+    JSON.stringify(firebaseConfig, null, 2) + '\n',
+    'utf-8',
+  );
+
+  const rootPackagePath = join(ROOT, 'package.json');
+  const rootPackage = JSON.parse(await readFile(rootPackagePath, 'utf-8'));
+  rootPackage.scripts['dev:web'] =
+    `nx dev web --port=${localDevelopment.webPort}`;
+  await writeFile(
+    rootPackagePath,
+    JSON.stringify(rootPackage, null, 2) + '\n',
+    'utf-8',
+  );
+
+  const firebaseProjectPath = join(ROOT, 'apps/firebase/project.json');
+  const firebaseProject = JSON.parse(
+    await readFile(firebaseProjectPath, 'utf-8'),
+  );
+  const emulatorPorts = Object.values(localDevelopment.firebaseEmulatorPorts);
+  firebaseProject.targets.killports.options.command = `kill-port --port ${emulatorPorts.join(',')}`;
+  await writeFile(
+    firebaseProjectPath,
+    JSON.stringify(firebaseProject, null, 2) + '\n',
+    'utf-8',
+  );
+
+  const urlsPath = join(ROOT, 'packages/constants/src/lib/urls.js');
+  let urlsContent = await readFile(urlsPath, 'utf-8');
+  const developmentApiPattern =
+    /export const API_URL_DEV\s*=\s*(?:\r?\n\s*)?'[^']*';/;
+  if (!developmentApiPattern.test(urlsContent)) {
+    throw new Error(`Could not update API_URL_DEV in ${urlsPath}`);
+  }
+  urlsContent = urlsContent.replace(
+    developmentApiPattern,
+    `export const API_URL_DEV =\n  'http://127.0.0.1:${localDevelopment.firebaseEmulatorPorts.functions}/${firebaseProjectId}/europe-west1/api';`,
+  );
+  await writeFile(urlsPath, urlsContent, 'utf-8');
   console.log('         Done.\n');
 
   console.log('  [4/7] Cleaning build artifacts...');
@@ -291,8 +428,13 @@ async function main() {
   console.log(`  "${finalDisplayName}" is ready!`);
   console.log('  ===============================\n');
   console.log('  Next steps:\n');
-  console.log('    npm run dev:web          Start the Next.js dev server');
-  console.log('    npm run dev:functions    Start Firebase emulators');
+  console.log(
+    `    npm run dev:web          Start Next.js at http://localhost:${localDevelopment.webPort}`,
+  );
+  console.log(
+    `    npm run dev:functions    Start Firebase emulators (Functions: ${localDevelopment.firebaseEmulatorPorts.functions})`,
+  );
+  console.log('    local-development.json   View all assigned local ports');
   if (gitRemote) {
     console.log(`    git push -u origin main  Push to remote`);
   }

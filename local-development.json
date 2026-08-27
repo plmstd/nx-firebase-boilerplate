@@ -1,0 +1,16 @@
+{
+  "webPort": 3000,
+  "firebaseEmulatorPorts": {
+    "auth": 9099,
+    "functions": 5001,
+    "firestore": 8080,
+    "database": 9000,
+    "hosting": 5000,
+    "pubsub": 8085,
+    "storage": 9199,
+    "eventarc": 9299,
+    "ui": 4000,
+    "hub": 4400,
+    "logging": 4500
+  }
+}

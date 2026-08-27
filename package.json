@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "dev:web": "nx dev web",
+    "dev:web": "nx dev web --port=3000",
     "dev:functions": "nx serve firebase-app --only functions",
     "deploy:functions": "nx deploy functions"
   },
