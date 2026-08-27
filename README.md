@@ -82,6 +82,24 @@ You can easily convert the JSON into a flat string using [this tool](https://www
 npm run deploy:functions
 ```
 
+### Optional: first deployment in a Google Workspace organization
+
+Google Workspace organization policies can block the first Functions deploy
+even when a normal Firebase project deploys successfully. This repository
+includes the explicit opt-in skill
+[`$firebase-workspace-functions-setup`](.agents/skills/firebase-workspace-functions-setup/SKILL.md)
+for that case.
+
+Ask your coding agent:
+
+> Use `$firebase-workspace-functions-setup` to prepare and verify the first
+> Firebase Functions deployment. The included HTTP function is `api` in
+> `europe-west1`, with `/test` as its health path. Do not read secrets.
+
+The workflow derives project-specific IDs at runtime, applies only narrow
+project and service changes, and never reads secret values. It is optional and
+must not be invoked for projects whose normal deployment already works.
+
 A Next.js website can be deployed any way you like. The easiest way is using Vercel.
 
 ## Project Structure
@@ -91,6 +109,7 @@ A Next.js website can be deployed any way you like. The easiest way is using Ver
 | `apps/web`               | Next.js frontend — pages, layouts, styles           |
 | `apps/functions`         | Firebase Cloud Functions — API routes, triggers     |
 | `apps/firebase`          | Firebase config — rules, indexes, emulator data     |
+| `.agents/skills`         | Optional, explicitly invoked agent workflows        |
 | `local-development.json` | Assigned ports for local development                |
 | `packages/icons`         | Project-owned React icon components                 |
 | `packages/modules`       | Shared app-level UI modules                         |

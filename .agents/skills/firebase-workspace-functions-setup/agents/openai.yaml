@@ -1,0 +1,6 @@
+interface:
+  display_name: 'Firebase Workspace Functions Setup'
+  short_description: 'Repair first Functions deploys under Workspace policy'
+  default_prompt: "Use $firebase-workspace-functions-setup to prepare and verify this project's first Firebase Functions deployment without reading secrets."
+policy:
+  allow_implicit_invocation: false
