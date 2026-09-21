@@ -1,6 +1,6 @@
 'use client';
 
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 
 /**
  * Fixed, accessible screen region that owns the interactive toast stack.

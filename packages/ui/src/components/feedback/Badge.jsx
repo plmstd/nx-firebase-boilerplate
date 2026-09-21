@@ -1,6 +1,6 @@
 import { forwardRef } from 'react';
 import { StatusDotIcon } from '@myapp/icons';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 
 const variantClasses = {
   neutral: 'border-border bg-surface text-text-muted',

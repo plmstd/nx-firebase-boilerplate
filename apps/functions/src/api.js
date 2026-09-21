@@ -2,7 +2,7 @@ import { onRequest } from 'firebase-functions/v2/https';
 import { setGlobalOptions } from 'firebase-functions/v2';
 import express from 'express';
 import cors from 'cors';
-import { logger } from '@myapp/backend';
+import { logger } from '@myapp/backend/logger';
 
 // set global options
 setGlobalOptions({ region: 'europe-west1' });

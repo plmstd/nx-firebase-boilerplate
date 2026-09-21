@@ -1,4 +1,4 @@
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 import { Label, Text } from '../typography';
 
 /**

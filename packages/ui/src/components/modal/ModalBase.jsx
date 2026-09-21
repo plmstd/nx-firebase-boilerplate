@@ -6,7 +6,7 @@ import {
   DialogPanel,
   TransitionChild,
 } from '@headlessui/react';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 import { useModalStore } from './modalStore';
 
 /** Shared Headless UI dialog frame used by all modal variants. */

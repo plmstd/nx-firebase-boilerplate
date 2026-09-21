@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 import { Spinner } from '../feedback/Spinner';
 
 const variantClasses = {

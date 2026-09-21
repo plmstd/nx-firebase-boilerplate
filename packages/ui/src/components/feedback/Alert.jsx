@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 import { InfoIcon, CheckIcon, WarningIcon, ErrorIcon } from '@myapp/icons';
 
 const variantClasses = {

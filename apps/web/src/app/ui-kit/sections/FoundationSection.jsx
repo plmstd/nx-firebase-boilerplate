@@ -1,5 +1,5 @@
 import { Label, Surface, Text } from '@myapp/ui';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 import { colorTokenGroups } from '../color-token-groups';
 import { KitSection } from '../components/KitSection';
 

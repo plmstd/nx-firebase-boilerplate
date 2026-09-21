@@ -1,0 +1,106 @@
+{
+  "source": "react-icons",
+  "version": "5.7.0",
+  "icons": [
+    {
+      "set": "fi",
+      "name": "FiLoader",
+      "sourceSha256": "64fa387ee083b1285a86249f8824cb2fddf4642d1daf48bc19daf218a8770408"
+    },
+    {
+      "set": "go",
+      "name": "GoDotFill",
+      "sourceSha256": "9a9a5dbd0ecb69a1b33ff6c88d7e21400d25dbf4dd90b432023f1348d2e8ceb6"
+    },
+    {
+      "set": "lu",
+      "name": "LuCheck",
+      "sourceSha256": "3ae8a0b11fc5f85621f25ac20dd03495b301d5825963375d9423be5b1f2062a7"
+    },
+    {
+      "set": "lu",
+      "name": "LuChevronDown",
+      "sourceSha256": "1ddd1b3775e9d3e3c522585420461f7ef3c78e0adff2b5d88e46abe3c551bd52"
+    },
+    {
+      "set": "lu",
+      "name": "LuChevronLeft",
+      "sourceSha256": "e9b6988cc509f76cda413aca384f14378c6b5bc02600d6706757f560fc61577d"
+    },
+    {
+      "set": "lu",
+      "name": "LuChevronRight",
+      "sourceSha256": "8ac36f5284b2c5b305ef4832af3a7dddc60b778c290f66eb71594ac4bc6e76c7"
+    },
+    {
+      "set": "lu",
+      "name": "LuCircleAlert",
+      "sourceSha256": "6bab0122797d382c7b13fba1205aca62d7fd1ac6d5107a39e4ec9885618cd037"
+    },
+    {
+      "set": "lu",
+      "name": "LuCircleCheckBig",
+      "sourceSha256": "f72593631def34bbbd33351aa0a81c15a51edd5ae2776ad65e400afb6261ec61"
+    },
+    {
+      "set": "lu",
+      "name": "LuExternalLink",
+      "sourceSha256": "2ebf1c03eaebda5177f9a03641e55f1e767a5fd351d223207bf2d2c2371023c9"
+    },
+    {
+      "set": "lu",
+      "name": "LuInfo",
+      "sourceSha256": "496012f609c45bb0eba37d91aa7c81698111ac4799ba00ca0bee497acba0d04e"
+    },
+    {
+      "set": "lu",
+      "name": "LuLoaderCircle",
+      "sourceSha256": "59858395203ce7cfcf2fe2b04e6918a31cd4fa5395e50a964ff92bec5785e0a4"
+    },
+    {
+      "set": "lu",
+      "name": "LuMenu",
+      "sourceSha256": "80c579077c8f8c104bf3483d30959c02a8c1a3a15399774ffd6b50757c63d608"
+    },
+    {
+      "set": "lu",
+      "name": "LuPencil",
+      "sourceSha256": "d3b7174b7ca18ef147e899a6c0b3a6bd7b41ade2bde5be8e13872cd8c9e5f3c8"
+    },
+    {
+      "set": "lu",
+      "name": "LuPlus",
+      "sourceSha256": "1f117079ebe170d4d73743ac7e5e80f8ea53d6f93dde149215cf371f34a127e6"
+    },
+    {
+      "set": "lu",
+      "name": "LuSearch",
+      "sourceSha256": "f44f0107a2e776167eebb10e740da2e8c203a24331132d86a336ae6ff9f39a97"
+    },
+    {
+      "set": "lu",
+      "name": "LuSettings",
+      "sourceSha256": "0a1d2fddae5f273df955010c2788232a1ed3a2528fa094bcb99502ddd810d358"
+    },
+    {
+      "set": "lu",
+      "name": "LuTrash2",
+      "sourceSha256": "c223a99007758465c2613fa50eb4c88b685668cd7035991f3faf27c4eb54180b"
+    },
+    {
+      "set": "lu",
+      "name": "LuTriangleAlert",
+      "sourceSha256": "8890c1d7c39e24c8507cad5321c9263415112068eb1dab81517317d613d132f0"
+    },
+    {
+      "set": "lu",
+      "name": "LuUser",
+      "sourceSha256": "eea00ddd143a943126fd6652e3885ac0f0ab380fe80b55aa287795584d13f1dd"
+    },
+    {
+      "set": "lu",
+      "name": "LuX",
+      "sourceSha256": "ef514e6f1ee3ddb2e01b1a9c5e2c6e728290b9f33442b889b6d401a1d8a6dfed"
+    }
+  ]
+}

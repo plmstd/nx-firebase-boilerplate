@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 
 /** Shared text input with forwarded native input props and ref. */
 export const Input = forwardRef(function Input(

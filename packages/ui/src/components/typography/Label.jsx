@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 
 const sizeClasses = {
   sm: 'text-caption',

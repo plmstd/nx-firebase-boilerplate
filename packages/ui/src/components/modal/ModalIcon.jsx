@@ -1,5 +1,5 @@
 import { CheckIcon, ErrorIcon, InfoIcon, WarningIcon } from '@myapp/icons';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 
 const iconMap = {
   default: InfoIcon,

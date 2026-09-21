@@ -1,7 +1,7 @@
 'use client';
 
 import { CloseIcon } from '@myapp/icons';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 import { IconButton } from '../primitives/IconButton';
 import { useModalStore } from './modalStore';
 

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { auth } from '@myapp/utils';
+import { auth } from '@myapp/utils/firebase';
 import { API_URL, API_URL_DEV } from '@myapp/constants';
 
 const getAuthHeader = async () => {

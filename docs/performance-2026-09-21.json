@@ -1,0 +1,204 @@
+{
+  "date": "2026-09-21",
+  "baseline_commit": "0a1dda6",
+  "runtime": {
+    "os": "macOS",
+    "physical_memory_gib": 64,
+    "node": "22.17.1",
+    "next": "16.0.11",
+    "nx": "22.3.3",
+    "react": "19.2.4",
+    "react_icons": "5.7.0",
+    "bundler": "Turbopack"
+  },
+  "method": "Next process-tree RSS sampled every 300 ms with ps; fresh .next per run; TCP readiness, cold / + /ui-kit + /api/hello and discovered JS/CSS requests, 2 s pause, three warm route cycles, 3 s settle. No concurrent browser test or Functions process. OS disk caches were not purged; first cold request includes remaining startup. HTTP workload only, browser interactions checked separately.",
+  "next_runs": [
+    {
+      "label": "baseline-1",
+      "peak_rss_mib": 1389.58,
+      "end_rss_mib": 1389.56,
+      "requested_dev_asset_bytes": 8835688,
+      "cold_routes": [
+        {
+          "path": "/",
+          "status": 200,
+          "ms": 3783.6
+        },
+        {
+          "path": "/ui-kit",
+          "status": 200,
+          "ms": 442.3
+        },
+        {
+          "path": "/api/hello",
+          "status": 200,
+          "ms": 119.0
+        }
+      ],
+      "warm_route_median_ms": {
+        "/": 16.3,
+        "/ui-kit": 54.7,
+        "/api/hello": 5.0
+      }
+    },
+    {
+      "label": "baseline-2",
+      "peak_rss_mib": 1367.17,
+      "end_rss_mib": 1367.16,
+      "requested_dev_asset_bytes": 8835688,
+      "cold_routes": [
+        {
+          "path": "/",
+          "status": 200,
+          "ms": 1715.9
+        },
+        {
+          "path": "/ui-kit",
+          "status": 200,
+          "ms": 403.3
+        },
+        {
+          "path": "/api/hello",
+          "status": 200,
+          "ms": 109.3
+        }
+      ],
+      "warm_route_median_ms": {
+        "/": 15.6,
+        "/ui-kit": 47.0,
+        "/api/hello": 3.7
+      }
+    },
+    {
+      "label": "utils-only",
+      "peak_rss_mib": 1333.2,
+      "end_rss_mib": 1333.2,
+      "requested_dev_asset_bytes": 8827666,
+      "cold_routes": [
+        {
+          "path": "/",
+          "status": 200,
+          "ms": 1565.7
+        },
+        {
+          "path": "/ui-kit",
+          "status": 200,
+          "ms": 366.6
+        },
+        {
+          "path": "/api/hello",
+          "status": 200,
+          "ms": 106.7
+        }
+      ],
+      "warm_route_median_ms": {
+        "/": 16.7,
+        "/ui-kit": 49.8,
+        "/api/hello": 5.6
+      }
+    },
+    {
+      "label": "optimized-1",
+      "peak_rss_mib": 1137.62,
+      "end_rss_mib": 1137.58,
+      "requested_dev_asset_bytes": 6141448,
+      "cold_routes": [
+        {
+          "path": "/",
+          "status": 200,
+          "ms": 1516.7
+        },
+        {
+          "path": "/ui-kit",
+          "status": 200,
+          "ms": 418.1
+        },
+        {
+          "path": "/api/hello",
+          "status": 200,
+          "ms": 111.5
+        }
+      ],
+      "warm_route_median_ms": {
+        "/": 19.1,
+        "/ui-kit": 55.0,
+        "/api/hello": 7.1
+      }
+    },
+    {
+      "label": "optimized-2",
+      "peak_rss_mib": 1146.5,
+      "end_rss_mib": 1146.5,
+      "requested_dev_asset_bytes": 6141448,
+      "cold_routes": [
+        {
+          "path": "/",
+          "status": 200,
+          "ms": 1544.9
+        },
+        {
+          "path": "/ui-kit",
+          "status": 200,
+          "ms": 415.9
+        },
+        {
+          "path": "/api/hello",
+          "status": 200,
+          "ms": 115.6
+        }
+      ],
+      "warm_route_median_ms": {
+        "/": 17.5,
+        "/ui-kit": 49.9,
+        "/api/hello": 5.3
+      }
+    }
+  ],
+  "bundle_probes": {
+    "cn_before": {
+      "bytes": 477641,
+      "firebase_modules": 17
+    },
+    "cn_after": {
+      "bytes": 28603,
+      "firebase_modules": 0
+    },
+    "ui_before": {
+      "moduleCount": 276,
+      "firebaseModules": 17,
+      "bytes": 559459
+    },
+    "ui_after": {
+      "moduleCount": 273,
+      "firebaseModules": 0,
+      "bytes": 110297
+    }
+  },
+  "functions": {
+    "method": "Separate fresh Node processes importing the actual bundled HTTP function, GET /test via a temporary loopback server, then 500 ms settling. RSS of the worker only, excluding Firebase CLI/emulator; no cloud requests.",
+    "baseline_bundle_bytes": 10678239,
+    "optimized_bundle_bytes": 4074177,
+    "runs": [
+      {
+        "label": "baseline-1",
+        "import_ms": 121,
+        "rss_mib": 110.28125
+      },
+      {
+        "label": "baseline-2",
+        "import_ms": 129,
+        "rss_mib": 110.0625
+      },
+      {
+        "label": "optimized-1",
+        "import_ms": 49,
+        "rss_mib": 73.265625
+      },
+      {
+        "label": "optimized-2",
+        "import_ms": 50,
+        "rss_mib": 73.25
+      }
+    ]
+  }
+}

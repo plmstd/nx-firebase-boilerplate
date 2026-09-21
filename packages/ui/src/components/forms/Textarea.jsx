@@ -1,5 +1,5 @@
 import { forwardRef } from 'react';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 
 /**
  * Shared textarea. Use `height` for fixed sizing, or provide `minHeight` and

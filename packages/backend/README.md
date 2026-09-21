@@ -1,7 +1,17 @@
-# backend
+# @myapp/backend
 
-This library was generated with [Nx](https://nx.dev).
+Shared server-only Firebase Admin helpers and logging.
 
-## Building
+Use the dedicated entry point when a function only needs logging:
 
-Run `nx build backend` to build the library.
+```js
+import { logger } from '@myapp/backend/logger';
+```
+
+This preserves the existing emulator/production logging behavior without loading
+the Admin SDK services. Admin helpers remain available from `@myapp/backend`;
+import them explicitly only where they are needed. Their initialization and
+credential handling are unchanged.
+
+The Functions build bundles this package. Validate with `npx nx build functions`
+and `npm run test:performance` after changing the entry points.

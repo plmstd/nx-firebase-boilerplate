@@ -1,7 +1,7 @@
 'use client';
 
 import { DialogTitle } from '@headlessui/react';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 import { Button } from '../primitives/Button';
 import { H6 } from '../typography/Heading';
 import { Text } from '../typography/Text';

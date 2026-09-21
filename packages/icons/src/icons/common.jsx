@@ -1,25 +1,23 @@
-import {
-  LuCheck,
-  LuCircleCheckBig,
-  LuChevronDown,
-  LuChevronLeft,
-  LuChevronRight,
-  LuExternalLink,
-  LuInfo,
-  LuLoaderCircle,
-  LuMenu,
-  LuPencil,
-  LuPlus,
-  LuSearch,
-  LuSettings,
-  LuTrash2,
-  LuUser,
-  LuTriangleAlert,
-  LuCircleAlert,
-  LuX,
-} from 'react-icons/lu';
-import { FiLoader } from 'react-icons/fi';
-import { GoDotFill } from 'react-icons/go';
+import { LuCheck } from '../glyphs/lu/LuCheck.js';
+import { LuCircleCheckBig } from '../glyphs/lu/LuCircleCheckBig.js';
+import { LuChevronDown } from '../glyphs/lu/LuChevronDown.js';
+import { LuChevronLeft } from '../glyphs/lu/LuChevronLeft.js';
+import { LuChevronRight } from '../glyphs/lu/LuChevronRight.js';
+import { LuExternalLink } from '../glyphs/lu/LuExternalLink.js';
+import { LuInfo } from '../glyphs/lu/LuInfo.js';
+import { LuLoaderCircle } from '../glyphs/lu/LuLoaderCircle.js';
+import { LuMenu } from '../glyphs/lu/LuMenu.js';
+import { LuPencil } from '../glyphs/lu/LuPencil.js';
+import { LuPlus } from '../glyphs/lu/LuPlus.js';
+import { LuSearch } from '../glyphs/lu/LuSearch.js';
+import { LuSettings } from '../glyphs/lu/LuSettings.js';
+import { LuTrash2 } from '../glyphs/lu/LuTrash2.js';
+import { LuUser } from '../glyphs/lu/LuUser.js';
+import { LuTriangleAlert } from '../glyphs/lu/LuTriangleAlert.js';
+import { LuCircleAlert } from '../glyphs/lu/LuCircleAlert.js';
+import { LuX } from '../glyphs/lu/LuX.js';
+import { FiLoader } from '../glyphs/fi/FiLoader.js';
+import { GoDotFill } from '../glyphs/go/GoDotFill.js';
 import { createIcon } from '../lib/create-icon.jsx';
 
 /** Icon for add/create actions. */

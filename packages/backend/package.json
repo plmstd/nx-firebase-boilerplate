@@ -7,6 +7,7 @@
   "types": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
+    "./logger": "./src/lib/logger.js",
     "./package.json": "./package.json"
   },
   "dependencies": {}

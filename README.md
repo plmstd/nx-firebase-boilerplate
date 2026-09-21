@@ -134,6 +134,25 @@ A Next.js website can be deployed any way you like. The easiest way is using Ver
 | `npx nx test <project>`    | Run tests for a project                |
 | `npx nx graph`             | Visualize the project dependency graph |
 
+## Keeping the starter lightweight
+
+- Import class-name utilities from `@myapp/utils/cn`. It does not initialize
+  Firebase. Auth/API code uses `@myapp/utils/firebase` explicitly.
+- Import the backend logger from `@myapp/backend/logger` so logging alone does
+  not pull in the Admin SDK services. The existing backend helpers remain available.
+- Add semantic icons to `packages/icons/src/icons/common.jsx` using individual
+  glyph paths, then run `npm run icons:generate` and include the generated files.
+  See [icon maintenance](packages/icons/README.md).
+- Run `npm run test:performance` after changing package entry points or icons.
+  It verifies SVG/context compatibility and the transitive dependency boundaries.
+- Next.js already uses Turbopack by default. No dependency upgrade, extra
+  production dependency, experimental bundler option or increased heap is needed
+  for these improvements.
+
+Measured results, validation and a short checklist for new projects are in
+[the performance guide](docs/PERFORMANCE.md). These are potential causes to
+check in a growing project, not a reason to remove required Firebase features.
+
 ## Tech Stack
 
 - **Nx** 22 — monorepo tooling, caching, task orchestration

@@ -8,7 +8,7 @@ import {
   InfoIcon,
   WarningIcon,
 } from '@myapp/icons';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 import { Button } from '../../primitives/Button';
 import { IconButton } from '../../primitives/IconButton';
 import { Text } from '../../typography/Text';

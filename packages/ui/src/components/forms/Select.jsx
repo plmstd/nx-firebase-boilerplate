@@ -2,7 +2,7 @@
 
 import { forwardRef, useState } from 'react';
 import { ChevronDownIcon } from '@myapp/icons';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 
 /**
  * Styled native select. `className` customizes the root while

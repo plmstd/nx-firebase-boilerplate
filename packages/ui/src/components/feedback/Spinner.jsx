@@ -1,5 +1,5 @@
 import { SpinnerIcon } from '@myapp/icons';
-import { cn } from '@myapp/utils';
+import { cn } from '@myapp/utils/cn';
 
 /**
  * Shared loading indicator with a static reduced-motion fallback.

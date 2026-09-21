@@ -7,7 +7,9 @@
   "types": "./src/index.js",
   "exports": {
     ".": "./src/index.js",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./cn": "./src/lib/cn.js",
+    "./firebase": "./src/lib/firebase-config.js"
   },
   "dependencies": {}
 }

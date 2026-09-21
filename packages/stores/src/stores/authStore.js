@@ -9,7 +9,7 @@ import {
 } from 'firebase/auth';
 import { doc, onSnapshot, serverTimestamp, setDoc } from 'firebase/firestore';
 import { create } from 'zustand';
-import { auth, db } from '@myapp/utils';
+import { auth, db } from '@myapp/utils/firebase';
 
 const DEFAULT_USER_COLLECTION = 'users';
 

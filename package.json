@@ -5,7 +5,10 @@
   "scripts": {
     "dev:web": "nx dev web --port=3000",
     "dev:functions": "nx serve firebase-app --only functions",
-    "deploy:functions": "nx deploy functions"
+    "deploy:functions": "nx deploy functions",
+    "icons:generate": "node tools/icons/generate.mjs",
+    "icons:check": "node tools/icons/generate.mjs --check",
+    "test:performance": "npm run icons:check && node --test tools/performance/*.test.mjs"
   },
   "private": true,
   "devDependencies": {
